@@ -12,6 +12,7 @@
 
 class Product < ActiveRecord::Base
 
+  validates :sku, uniqueness: true
   validates_presence_of :name, :sku, :category
 
 end
