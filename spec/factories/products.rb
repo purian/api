@@ -12,9 +12,8 @@
 
 FactoryGirl.define do
   factory :product do
-    name "MyString"
-sku "MyString"
-category "MyString"
+    name     { Faker::Commerce.product_name }
+    category { Faker::Commerce.department }
+    sku      { Array.new(8){[*'0'..'9', *'A'..'Z'].sample}.join }
   end
-
 end
