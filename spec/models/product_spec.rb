@@ -10,8 +10,17 @@
 #  updated_at :datetime         not null
 #
 
-require 'rails_helper'
+require "spec_helper"
 
-RSpec.describe Product, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+describe Product do
+  it "should have a factory" do
+    expect(FactoryGirl.build(:product)).to be_valid
+  end
+
+  context "validations" do
+    it { should validate_uniqueness_of(:sku) }
+    it { should validate_presence_of(:sku) }
+    it { should validate_presence_of(:name) }
+    it { should validate_presence_of(:category) }
+  end
 end
