@@ -20,6 +20,7 @@ group :development do
   gem "meta_request"
   gem "quiet_assets"
   gem "spring"
+  gem 'annotate', '~> 2.6.6'
 end
 
 group :development, :test do
