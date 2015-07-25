@@ -7,7 +7,7 @@ module API
         prefix "api"
         version "v1", using: :path
         default_format :json
-        format :json
+        # format :json # From some reason the route get defected while trying to fetch directly from Swagger with this function on
         formatter :json, Grape::Formatter::ActiveModelSerializers
 
         helpers do
