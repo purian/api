@@ -8,6 +8,9 @@ module API
         get "", root: :products do
           page = (params[:page] || 1).to_i
           products = Product.page(page).per((params[:per_page] || 10).to_i)
+          if params[:category_filter]
+            products = products.where("lower(category) LIKE ?","#{params[:category_filter].downcase}%")
+          end
           render products, :meta => {:total_pages => products.total_pages, :page => (params[:page] || 1).to_i}
         end
 
