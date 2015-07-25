@@ -6,7 +6,9 @@ module API
       resource :products do
         desc "Return all products"
         get "", root: :products do
-          Product.all
+          page = (params[:page] || 1).to_i
+          products = Product.page(page).per((params[:per_page] || 10).to_i)
+          render products, :meta => {:total_pages => products.total_pages, :page => (params[:page] || 1).to_i}
         end
 
         desc "Return a product"
@@ -16,6 +18,18 @@ module API
         get ":id", root: "product" do
           Product.where(id: permitted_params[:id]).first!
         end
+
+        desc "Update a product"
+        put ':id' do
+          product = Product.where(id: params[:id]).first!
+          product.name = params[:product][:name] if params[:product][:name]
+          product.sku = params[:product][:sku] if params[:product][:sku]
+          product.category = params[:product][:category] if params[:product][:category]
+          product.save
+
+          product
+        end
+
       end
     end
   end

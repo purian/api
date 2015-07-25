@@ -352,6 +352,7 @@ DEPENDENCIES
   grape-active_model_serializers
   grape-swagger-rails
   jquery-rails
+  kaminari
   meta_request
   pg
   poltergeist
